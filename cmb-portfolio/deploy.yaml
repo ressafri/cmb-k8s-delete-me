@@ -17,6 +17,33 @@ spec:
     spec:
       containers:
         - name: cmb-portfolio-nginx
-          image: harbor.coinmarketboards.com/dev-test/nginx:1.29.3-alpine-amd64
+          image: harbor.coinmarketboards.com/dev-test/nginx:1.27-alpine
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+      # imagePullSecrets:
+      #   - name: harbor-registry-secret  # Uncomment if Harbor requires authentication
