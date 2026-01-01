@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: cmb-webstore-nginx
-          image: 192.168.0.21:80/dev-test/nginx:1.27.5
+          image: 192.168.0.21/dev-test/nginx:1.27.5
           ports:
             - containerPort: 80
