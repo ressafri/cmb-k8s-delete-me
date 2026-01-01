@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: cmb-webstore-nginx
-          image: harbor.coinmarketboards.com/dev-test/nginx:1.27.5
+          image: harbor.coinmarketboards.com/dev-test/nginx:1.29.3-alpine-amd64
           ports:
             - containerPort: 80
