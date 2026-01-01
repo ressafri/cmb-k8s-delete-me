@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cmb-webstore-nginx
+  name: cmb-portfolio-nginx
   namespace: cmb-production
   labels:
-    app: cmb-webstore-nginx
+    app: cmb-portfolio-nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cmb-webstore-nginx
+      app: cmb-portfolio-nginx
   template:
     metadata:
       labels:
-        app: cmb-webstore-nginx
+        app: cmb-portfolio-nginx
     spec:
       containers:
-        - name: cmb-webstore-nginx
+        - name: cmb-portfolio-nginx
           image: harbor.coinmarketboards.com/dev-test/nginx:1.29.3-alpine-amd64
           ports:
             - containerPort: 80
