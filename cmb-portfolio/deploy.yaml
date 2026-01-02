@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: cmb-portfolio-nginx
-          image: harbor.coinmarketboards.com/dev-test/nginx:1.27-alpine
+          image: harbor.coinmarketboards.com/dev-test/nginx:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
