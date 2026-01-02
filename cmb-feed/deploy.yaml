@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cmb-feed-nginx
+  namespace: cmb-production
+  labels:
+    app: cmb-feed-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cmb-feed-nginx
+  template:
+    metadata:
+      labels:
+        app: cmb-feed-nginx
+    spec:
+      containers:
+        - name: cmb-feed-nginx
+          image: harbor.coinmarketboards.com/dev-test/nginx:1.27-alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+      # imagePullSecrets:
+      #   - name: harbor-registry-secret  # Uncomment if Harbor requires authentication
